@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import axios from 'axios';
-import Image from 'next/image'; // Import the Image component from Next.js
+import Image from 'next/image';
 
 const base = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -10,23 +10,7 @@ export default function CreateProduct() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(''); // Keep price as a string
-  const [features, setFeatures] = useState<string[]>(['']); // Initialize with one empty field
   const [images, setImages] = useState<File[]>([]); // State for images
-
-  const handleFeatureChange = (index: number, value: string) => {
-    const newFeatures = [...features];
-    newFeatures[index] = value;
-    setFeatures(newFeatures);
-  };
-
-  const addFeature = () => {
-    setFeatures([...features, '']); // Add a new empty field
-  };
-
-  const removeFeature = (index: number) => {
-    const newFeatures = features.filter((_, i) => i !== index);
-    setFeatures(newFeatures);
-  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -41,9 +25,6 @@ export default function CreateProduct() {
     formData.append('name', name);
     formData.append('description', description);
     formData.append('price', price);
-    features.forEach((feature) => {
-      formData.append('features[]', feature); // Append each feature
-    });
     images.forEach((image) => {
       formData.append('files', image); // Append each image
     });
@@ -59,7 +40,6 @@ export default function CreateProduct() {
       setName('');
       setDescription('');
       setPrice('');
-      setFeatures(['']); // Reset features to one empty field
       setImages([]); // Reset images
       alert('Product created successfully!');
     } catch (error) {
@@ -107,10 +87,6 @@ export default function CreateProduct() {
         </label>
       </div>
       <div>
-       
-       
-      </div>
-      <div>
         <label className="block mb-1">
           Upload Images:
           <input
@@ -134,7 +110,7 @@ export default function CreateProduct() {
           </div>
         ))}
       </div>
-      <button type="submit" className="bg-green-500 text-white py-2 px-4 mb-20 rounded ">
+      <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded">
         Create Product
       </button>
     </form>
