@@ -1,5 +1,5 @@
 import axios from 'axios';
-let base = process.env.NEXT_PUBLIC_BASE_URL;
+const base = process.env.NEXT_PUBLIC_BASE_URL;
 export default async function ProductList() {
   const response = await axios.get(`${base}/product`);
   // console.log("res",response)
