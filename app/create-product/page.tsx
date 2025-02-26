@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import axios from 'axios';
-let base = process.env.NEXT_PUBLIC_BASE_URL;
+const base = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function CreateProduct() {
   const [name, setName] = useState('');
